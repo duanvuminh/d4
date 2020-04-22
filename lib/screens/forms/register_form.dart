@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:d4/forms/selectTinh.dart';
-import 'package:d4/forms/selectHuyen.dart';
+import 'package:d4/screens/forms/selectTinh.dart';
+import 'package:d4/screens/forms/selectHuyen.dart';
+import 'package:d4/models/login.dart';
 import 'package:provider/provider.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -10,15 +11,13 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String tinh;
-  void _updateTinh(String tinh){
-    this.setState((){
-      this.tinh = tinh;
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[
+    return MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => LoginModel(""))
+    ],
+    child: Column(children: <Widget>[
       Form(
       key: _formKey,
       child: Column(
@@ -58,9 +57,9 @@ class _RegisterFormState extends State<RegisterForm> {
             },
           ),
           const SizedBox(height: 16.0),
-          SelectTinh(onSelectTinh: (val) => _updateTinh(val)),
+          SelectTinh(),
           const SizedBox(height: 16.0),
-          SelectHuyen(tinhId: tinh),
+          SelectHuyen(),
           const SizedBox(height: 16.0),
           TextFormField(
             decoration: const InputDecoration(
@@ -125,7 +124,8 @@ class _RegisterFormState extends State<RegisterForm> {
       ),
     ),
     const Spacer()
-    ]);
+    ])
+    );
   }
 
   void _submit() {
