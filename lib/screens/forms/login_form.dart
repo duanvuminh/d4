@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:d4/screens/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:d4/services/authen.dart';
+import 'package:d4/services/unitiesClass.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -42,29 +45,29 @@ class _LoginForm extends State<LoginForm> {
                 }
               },
             ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Mật khẩu*',
-                hintText: ">= 8 ký tự",
-                prefixIcon: Icon(Icons.lock),
-              ),
-              validator: (String value) {
-                if (value.trim().length < 8) {
-                  return 'Mật khẩu lớn hơn 8 kí tự';
-                } else if (value
-                    .trim()
-                    .contains(new RegExp(r'^.*[a-zA-Z]{1,}[0-9]{1,}.*$'))) {
-                  return 'Mật khẩu không đúng định dạng';
-                } else {
-                  return null;
-                }
-              },
-            ),
-            Row(children: <Widget>[
-              const Spacer(),
-              FlatButton(child: new Text('Quên mật khẩu'), onPressed: () {})
-            ]),
+            // const SizedBox(height: 16.0),
+            // TextFormField(
+            //   decoration: const InputDecoration(
+            //     labelText: 'Mật khẩu*',
+            //     hintText: ">= 8 ký tự",
+            //     prefixIcon: Icon(Icons.lock),
+            //   ),
+            //   validator: (String value) {
+            //     if (value.trim().length < 8) {
+            //       return 'Mật khẩu lớn hơn 8 kí tự';
+            //     } else if (value
+            //         .trim()
+            //         .contains(new RegExp(r'^.*[a-zA-Z]{1,}[0-9]{1,}.*$'))) {
+            //       return 'Mật khẩu không đúng định dạng';
+            //     } else {
+            //       return null;
+            //     }
+            //   },
+            // ),
+            // Row(children: <Widget>[
+            //   const Spacer(),
+            //   FlatButton(child: new Text('Quên mật khẩu'), onPressed: () {})
+            // ]),
             const SizedBox(height: 16.0),
             RaisedButton(
                 color: Colors.red,
@@ -125,9 +128,36 @@ class _LoginForm extends State<LoginForm> {
 
   void _submit() {
     if (_formKey.currentState.validate()) {
-      const SnackBar snackBar = SnackBar(content: Text('Form submitted'));
-
-      Scaffold.of(context).showSnackBar(snackBar);
+      verifyPhone("+1 650-555-3434");
     }
+  }
+
+  Future<void> verifyPhone(phoneNo) async {
+    final PhoneVerificationCompleted verified = (AuthCredential authResult) {
+      AuthService().signIn(authResult);
+    };
+
+    final PhoneVerificationFailed verificationfailed =
+        (AuthException authException) {
+      print('${authException.message}');
+    };
+
+    final PhoneCodeSent smsSent = (String verId, [int forceResend]) {
+      Agrs agrs = new Agrs();
+      agrs.verificationId = verId;
+      Navigator.pushNamed(context, "opt",arguments: agrs);
+    };
+
+    final PhoneCodeAutoRetrievalTimeout autoTimeout = (String verId) {
+      // this.verificationId = verId;
+    };
+
+    await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: phoneNo,
+        timeout: const Duration(seconds: 25),
+        verificationCompleted: verified,
+        verificationFailed: verificationfailed,
+        codeSent: smsSent,
+        codeAutoRetrievalTimeout: autoTimeout);
   }
 }

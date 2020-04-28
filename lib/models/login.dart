@@ -12,15 +12,21 @@ import 'package:flutter/material.dart';
 /// For simplicity, the catalog is expected to be immutable (no products are
 /// expected to be added, removed or changed during the execution of the app).
 class LoginModel extends ChangeNotifier {
-  LoginModel(String tinhId) {
-    _tinhID = tinhId;
-  }
-  String _tinhID="";
+  
+  String isdn;
+  String name;
+  String tinhID;
+  String huyenID;
+
+  LoginModel({this.isdn,this.name,this.tinhID,this.huyenID});
+
+  //notify用
   void setTinhID(String id) {
-    this._tinhID = id;
+    this.tinhID = id;
     notifyListeners();
   }
+
   String getTinhID(){
-    return this._tinhID;
+    return this.tinhID;
   }
 }

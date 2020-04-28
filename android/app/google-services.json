@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "790879716271",
+    "firebase_url": "https://d3vm-d6980.firebaseio.com",
+    "project_id": "d3vm-d6980",
+    "storage_bucket": "d3vm-d6980.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790879716271:android:3b0c8a5031534a3a01255a",
+        "android_client_info": {
+          "package_name": "com.example.d4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790879716271-1ckoemi25rhg25nddv89duff7b6b0gfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOqIv7xUnTtL1F3aQ_eJsEVicnhUn-P38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790879716271-1ckoemi25rhg25nddv89duff7b6b0gfc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "790879716271-fpucpqdbbqelb4ujn942mog7jsrcjrp8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "d3ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

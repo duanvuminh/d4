@@ -94,7 +94,7 @@ class _SelectTinh extends State<SelectTinh> {
           }
           return (DropdownButtonFormField<String>(
             validator: (String val) {
-              if (val.trim().isEmpty) {
+              if (val==null || val.trim().isEmpty) {
                 return 'Tên không được trống';
               } else {
                 return null;
@@ -107,6 +107,7 @@ class _SelectTinh extends State<SelectTinh> {
             onChanged: (val) {
               tinhId = val;
               login.setTinhID(val);
+              widget.onSelectTinh(val);
             },
           ));
         });

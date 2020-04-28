@@ -3,7 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:d4/models/login.dart';
 
+typedef StringValue = void Function(String);
 class SelectHuyen extends StatefulWidget {
+  const SelectHuyen({Key key, this.onSelectHuyen}) : super(key: key);
+  final StringValue onSelectHuyen;
   @override
   _SelectHuyen createState() => _SelectHuyen();
 }
@@ -13,7 +16,7 @@ class _SelectHuyen extends State<SelectHuyen> {
   String huyenId;
   Future<List<String>> getHuyens() {
     var login = Provider.of<LoginModel>(context);
-    if (login.getTinhID() != '') {
+    if (login.getTinhID() != null) {
       return databaseReference
           .collection('tinhs/' + login.getTinhID() + '/huyens')
           .getDocuments()
@@ -22,7 +25,7 @@ class _SelectHuyen extends State<SelectHuyen> {
         snapshot.documents.forEach((f) {
           huyens.add(f.data["name"]);
         });
-        huyenId = huyens[0];
+        // huyenId = huyens[0];
         return huyens;
       }).catchError((error) {
         // error handle
@@ -64,7 +67,7 @@ class _SelectHuyen extends State<SelectHuyen> {
           }
           return DropdownButtonFormField<String>(
               validator: (String val) {
-                if (val.trim().isEmpty) {
+                if (val == null || val.trim().isEmpty) {
                   return 'Tên không được trống';
                 } else {
                   return null;
@@ -75,7 +78,10 @@ class _SelectHuyen extends State<SelectHuyen> {
               isDense: true,
               items: dropDownList,
               onChanged: (val) {
-                huyenId = val;
+                this.setState((){
+                  huyenId = val;
+                });
+                widget.onSelectHuyen(val);
               });
         });
   }

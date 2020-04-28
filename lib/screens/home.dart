@@ -15,6 +15,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Text('Signout'),
       onPressed: () {
         AuthService().signOut();
+        Navigator.pushNamed(context, "/");
       },
     )));
   }
