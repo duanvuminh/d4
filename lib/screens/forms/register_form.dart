@@ -6,7 +6,7 @@ import 'package:d4/services/authen.dart';
 import 'package:d4/models/login.dart';
 
 import 'package:provider/provider.dart';
-import 'package:d4/services/unitiesClass.dart';
+import 'package:d4/utils/unitiesClass.dart';
 
 
 class RegisterForm extends StatefulWidget {
@@ -171,9 +171,7 @@ class _RegisterFormState extends State<RegisterForm> {
     };
 
     final PhoneCodeSent smsSent = (String verId, [int forceResend]) {
-      Agrs agrs = new Agrs();
-      agrs.verificationId = verId;
-      agrs.name = model.name;
+      Agrs agrs = new Agrs.fromRegister(model.name,verId);
       Navigator.pushNamed(context, "opt",arguments: agrs);
     };
 

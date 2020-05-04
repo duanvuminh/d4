@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:d4/screens/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:d4/services/authen.dart';
-import 'package:d4/services/unitiesClass.dart';
+import 'package:d4/utils/unitiesClass.dart';
+import 'package:d4/models/user_model.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -70,12 +72,10 @@ class _LoginForm extends State<LoginForm> {
             // ]),
             const SizedBox(height: 16.0),
             RaisedButton(
-                color: Colors.red,
                 child: Center(
-                    child: Text(
-                  'Đăng nhập',
-                  style: TextStyle(color: Colors.white),
-                )),
+                    child: Text('Đăng nhập',
+                        style: TextStyle(color: Colors.white))),
+                color: Colors.redAccent,
                 onPressed: _submit),
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -92,9 +92,7 @@ class _LoginForm extends State<LoginForm> {
                             text:
                                 'Tổng đài chăm sóc khách hàng', // default text style
                             children: <TextSpan>[
-                              TextSpan(
-                                  text: ' 08023607047 '
-                              )
+                              TextSpan(text: ' 08023607047 ')
                             ],
                           ),
                         )),
@@ -110,7 +108,6 @@ class _LoginForm extends State<LoginForm> {
         child: Column(
           children: <Widget>[
             Text('Chưa có tài khoản'),
-            const SizedBox(height: 16.0),
             FlatButton(
                 child: new Text('Đăng kí'),
                 onPressed: () {
@@ -133,8 +130,10 @@ class _LoginForm extends State<LoginForm> {
   }
 
   Future<void> verifyPhone(phoneNo) async {
+    var userRepository = Provider.of<UserRepository>(context);
+
     final PhoneVerificationCompleted verified = (AuthCredential authResult) {
-      AuthService().signIn(authResult);
+      userRepository.signIn(authResult);
     };
 
     final PhoneVerificationFailed verificationfailed =
@@ -143,9 +142,8 @@ class _LoginForm extends State<LoginForm> {
     };
 
     final PhoneCodeSent smsSent = (String verId, [int forceResend]) {
-      Agrs agrs = new Agrs();
-      agrs.verificationId = verId;
-      Navigator.pushNamed(context, "opt",arguments: agrs);
+      Agrs agrs = new Agrs.fromLogin(verId);
+      Navigator.pushNamed(context, "opt", arguments: agrs);
     };
 
     final PhoneCodeAutoRetrievalTimeout autoTimeout = (String verId) {

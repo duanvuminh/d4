@@ -1,11 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:d4/services/authen.dart';
+import 'package:d4/utils/unitiesClass.dart';
+import 'package:d4/models/user_model.dart';
+
 
 class OPTConfirm extends StatefulWidget {
-  OPTConfirm({this.verificationId, this.name});
-  final String verificationId;
-  final String name;
-
   @override
   _OPTConfirmState createState() => _OPTConfirmState();
 }
@@ -15,6 +16,8 @@ class _OPTConfirmState extends State<OPTConfirm> {
 
   @override
   Widget build(BuildContext context) {
+    var userRepository = Provider.of<UserRepository>(context);
+    final Agrs args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
@@ -43,7 +46,12 @@ class _OPTConfirmState extends State<OPTConfirm> {
                       style: TextStyle(color: Colors.white),
                     )),
                     onPressed: () {
-                      AuthService().signInWithOTP(smsCode, widget.verificationId, widget.name);
+                      userRepository.signInWithOTP(smsCode, args.verificationId)
+                      .then((AuthResult auth){
+                        // save user with name
+                        
+                        Navigator.pushNamed(context, "/");
+                      });
                     }),
               ],
             )));

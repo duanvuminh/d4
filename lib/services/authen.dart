@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
 class AuthService {
   //Sign out
   signOut() {
@@ -7,26 +6,14 @@ class AuthService {
   }
 
   //SignIn
-  signInWithName(AuthCredential authCreds,name) {
-    FirebaseAuth.instance
-    .signInWithCredential(authCreds)
-    .then((onValue){
-      
-    });
+  Future<AuthResult> signIn(AuthCredential authCreds) {
+    return FirebaseAuth.instance
+    .signInWithCredential(authCreds);
   }
 
-  //SignIn
-  signIn(AuthCredential authCreds) {
-    FirebaseAuth.instance
-    .signInWithCredential(authCreds)
-    .then((onValue){
-      
-    });
-  }
-
-  signInWithOTP(smsCode, verId, name) {
+  signInWithOTP(smsCode, verId) {
     AuthCredential authCreds = PhoneAuthProvider.getCredential(
         verificationId: verId, smsCode: smsCode);
-    signInWithName(authCreds,name);
+     return signIn(authCreds);
   }
 }
