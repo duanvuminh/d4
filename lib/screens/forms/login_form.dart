@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:d4/screens/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:d4/services/authen.dart';
 import 'package:d4/utils/unitiesClass.dart';
 import 'package:d4/models/user_model.dart';
+import 'package:d4/localizes/d4Localizations.dart';
+
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -39,7 +40,7 @@ class _LoginForm extends State<LoginForm> {
               ),
               validator: (String value) {
                 if (value.trim().length != 8) {
-                  return 'ISDN không đúng định dạng';
+                  return D4Localizations.of(context).phoneValidate;
                 } else if (value[0] != '2' && value[0] != '5') {
                   return 'ISDN không đúng định dạng';
                 } else {
