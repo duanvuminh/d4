@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show SynchronousFuture;
 import 'package:flutter/material.dart';
 
 class D4Localizations {
@@ -12,14 +12,39 @@ class D4Localizations {
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
-      'phone_validate': 'ISDN in en'
+      'phone_validate': 'ISDN is incorrect format',
+      'contact': 'Contact number',
+      'login': 'Login',
+      'acount':"Don't have an acount?",
+      'register': 'Register'
     },
-    'vn': {
-      'phone_validate': 'ISDN không đúng định dạng'
+    'vi': {
+      'phone_validate': 'ISDN không đúng định dạng',
+      'contact': 'Liên hệ',
+      'login': 'Đăng nhập',
+      'acount':"Chưa có tài khoản",
+      'register': 'Đăng kí'
+
     },
   };
   String get phoneValidate {
     return _localizedValues[locale.languageCode]['phone_validate'];
+  }
+
+  String get contact {
+    return _localizedValues[locale.languageCode]['contact'];
+  }
+
+  String get login {
+    return _localizedValues[locale.languageCode]['login'];
+  }
+
+  String get acount {
+    return _localizedValues[locale.languageCode]['acount'];
+  }
+
+  String get register {
+    return _localizedValues[locale.languageCode]['register'];
   }
 }
 
@@ -27,7 +52,7 @@ class D4LocalizationsDelegate extends LocalizationsDelegate<D4Localizations> {
   const D4LocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'vn'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'vi'].contains(locale.languageCode);
 
   @override
   Future<D4Localizations> load(Locale locale) {

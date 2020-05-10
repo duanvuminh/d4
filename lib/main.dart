@@ -7,7 +7,6 @@ import 'package:d4/screens/register.dart';
 import 'package:d4/screens/optConfirm.dart';
 import 'package:d4/themes/theme.dart';
 import 'package:d4/models/user_model.dart';
-import 'package:d4/models/locale.dart';
 import 'package:d4/localizes/d4Localizations.dart';
 
 void main() {
@@ -48,18 +47,14 @@ class MyApp extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        //locale: getLocal(context),
         supportedLocales: [
           const Locale('en', ''),
-          const Locale('vn', ''),
+          const Locale('vi', ''),
         ],
       ),
       providers: [
         ChangeNotifierProvider(
           create: (context) => UserRepository(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => LocaleModel(),
         )
       ],
     );
@@ -83,3 +78,4 @@ class MyApp extends StatelessWidget {
 //       },
 //       theme: appTheme,
 //     );
+// export PATH="$PATH:/Users/user/Public/dev/flutter/bin"

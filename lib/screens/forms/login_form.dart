@@ -42,7 +42,7 @@ class _LoginForm extends State<LoginForm> {
                 if (value.trim().length != 8) {
                   return D4Localizations.of(context).phoneValidate;
                 } else if (value[0] != '2' && value[0] != '5') {
-                  return 'ISDN không đúng định dạng';
+                  return D4Localizations.of(context).phoneValidate;
                 } else {
                   return null;
                 }
@@ -91,7 +91,8 @@ class _LoginForm extends State<LoginForm> {
                         child: SelectableText.rich(
                           TextSpan(
                             text:
-                                'Tổng đài chăm sóc khách hàng', // default text style
+                               D4Localizations.of(context).contact,// default text style
+                               // Localizations.localeOf(context).languageCode,// default text style
                             children: <TextSpan>[
                               TextSpan(text: ' 08023607047 ')
                             ],
@@ -108,9 +109,9 @@ class _LoginForm extends State<LoginForm> {
         padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
         child: Column(
           children: <Widget>[
-            Text('Chưa có tài khoản'),
+            Text(D4Localizations.of(context).acount),
             FlatButton(
-                child: new Text('Đăng kí'),
+                child: new Text(D4Localizations.of(context).register),
                 onPressed: () {
                   Navigator.push(
                     context,
