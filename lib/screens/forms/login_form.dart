@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:d4/screens/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:d4/utils/unitiesClass.dart';
 import 'package:d4/models/user_model.dart';
 import 'package:d4/localizes/d4Localizations.dart';
-
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -74,7 +73,7 @@ class _LoginForm extends State<LoginForm> {
             const SizedBox(height: 16.0),
             RaisedButton(
                 child: Center(
-                    child: Text('Đăng nhập',
+                    child: Text(D4Localizations.of(context).next,
                         style: TextStyle(color: Colors.white))),
                 color: Colors.redAccent,
                 onPressed: _submit),
@@ -90,9 +89,9 @@ class _LoginForm extends State<LoginForm> {
                         padding: EdgeInsets.symmetric(horizontal: 5),
                         child: SelectableText.rich(
                           TextSpan(
-                            text:
-                               D4Localizations.of(context).contact,// default text style
-                               // Localizations.localeOf(context).languageCode,// default text style
+                            text: D4Localizations.of(context)
+                                .contact, // default text style
+                            // Localizations.localeOf(context).languageCode,// default text style
                             children: <TextSpan>[
                               TextSpan(text: ' 08023607047 ')
                             ],
@@ -105,23 +104,6 @@ class _LoginForm extends State<LoginForm> {
         ),
       ),
       const Spacer(),
-      Padding(
-        padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-        child: Column(
-          children: <Widget>[
-            Text(D4Localizations.of(context).acount),
-            FlatButton(
-                child: new Text(D4Localizations.of(context).register),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                  );
-                }),
-            const SizedBox(height: 16.0),
-          ],
-        ),
-      )
     ]);
   }
 

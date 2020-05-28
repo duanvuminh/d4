@@ -8,11 +8,10 @@ class UserRepository with ChangeNotifier {
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
 
-  UserRepository(){
+  UserRepository() {
     _auth = FirebaseAuth.instance;
     _auth.onAuthStateChanged.listen(_onAuthStateChanged);
   }
-
 
   Status get status => _status;
   FirebaseUser get user => _user;

@@ -1,10 +1,9 @@
+import 'package:d4/localizes/d4Localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:d4/services/authen.dart';
 import 'package:d4/utils/unitiesClass.dart';
 import 'package:d4/models/user_model.dart';
-
 
 class OPTConfirm extends StatefulWidget {
   @override
@@ -28,9 +27,9 @@ class _OPTConfirmState extends State<OPTConfirm> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'OPT*',
-                    hintText: "Mã OPT gửi đến sdt của bạn",
+                    hintText: D4Localizations.of(context).optHint,
                     prefixIcon: Icon(Icons.lock),
                   ),
                   onChanged: (val) {
@@ -42,15 +41,16 @@ class _OPTConfirmState extends State<OPTConfirm> {
                     color: Colors.red,
                     child: Center(
                         child: Text(
-                      'Gửi',
+                      D4Localizations.of(context).optConfirm,
                       style: TextStyle(color: Colors.white),
                     )),
                     onPressed: () {
-                      userRepository.signInWithOTP(smsCode, args.verificationId)
-                      .then((AuthResult auth){
+                      userRepository
+                          .signInWithOTP(smsCode, args.verificationId)
+                          .then((AuthResult auth) {
                         // save user with name
-                        
-                        Navigator.pushNamed(context, "/");
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/', (Route<dynamic> route) => false);
                       });
                     }),
               ],

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:d4/services/authen.dart';
 
+import 'package:d4/screens/components/appbar.dart';
+
+import 'components/balance.dart';
+
 class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -10,15 +14,16 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-            child: RaisedButton(
-      child: Text('Signout'),
-      onPressed: () {
-        AuthService().signOut();
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-        Navigator.pushNamed(context, "/");
-      },
-    )));
+        appBar: CAppbar(),
+        body: Padding(
+          padding: EdgeInsets.all(5),
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[Expanded(child: CBlance())],
+              )
+            ],
+          ),
+        ));
   }
 }

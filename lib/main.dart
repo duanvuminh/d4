@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+
 import 'package:d4/screens/home.dart';
 import 'package:d4/screens/login.dart';
-import 'package:d4/screens/register.dart';
+import 'package:d4/screens/loading.dart';
 import 'package:d4/screens/optConfirm.dart';
 import 'package:d4/themes/theme.dart';
 import 'package:d4/models/user_model.dart';
@@ -21,24 +22,16 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: "/",
         routes: {
-          // "/": (context) => StreamBuilder(
-          //     stream: FirebaseAuth.instance.onAuthStateChanged,
-          //     builder: (BuildContext context, snapshot) {
-          //       if (snapshot.hasData) {
-          //         return DashboardPage();
-          //       } else {
-          //         return LoginPage();
-          //       }
-          //     }),
           "/": (context) {
             var userRepository = Provider.of<UserRepository>(context);
             if (userRepository.status == Status.Authenticated) {
               return DashboardPage();
+            } else if (userRepository.status == Status.Uninitialized) {
+              return LoadingPage();
             } else {
               return LoginPage();
             }
           },
-          "register": (context) => RegisterPage(),
           "opt": (context) => OPTConfirm()
         },
         theme: appTheme,
@@ -61,21 +54,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// MaterialApp(
-//       initialRoute: "/",
-//       routes: {
-//         "/": (context) => StreamBuilder(
-//             stream: FirebaseAuth.instance.onAuthStateChanged,
-//             builder: (BuildContext context, snapshot) {
-//               if (snapshot.hasData) {
-//                 return DashboardPage();
-//               } else {
-//                 return LoginPage();
-//               }
-//             }),
-//         "register": (context) => RegisterPage(),
-//         "opt": (context) => OPTConfirm()
-//       },
-//       theme: appTheme,
-//     );
-// export PATH="$PATH:/Users/user/Public/dev/flutter/bin"
+// export PATH="$PATH:/Users/vuduan/Public/code/flutter/bin"

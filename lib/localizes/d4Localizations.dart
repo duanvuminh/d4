@@ -15,16 +15,23 @@ class D4Localizations {
       'phone_validate': 'ISDN is incorrect format',
       'contact': 'Contact number',
       'login': 'Login',
-      'acount':"Don't have an acount?",
-      'register': 'Register'
+      'acount': "Don't have an acount?",
+      'register': 'Register',
+      'next': 'Next',
+      'opt_confirm': 'Confirm',
+      'opt_hint': 'OPT was send to your phone',
+      'balance': 'Balance',
     },
     'vi': {
       'phone_validate': 'ISDN không đúng định dạng',
       'contact': 'Liên hệ',
       'login': 'Đăng nhập',
-      'acount':"Chưa có tài khoản",
-      'register': 'Đăng kí'
-
+      'acount': "Chưa có tài khoản",
+      'register': 'Đăng kí',
+      'next': 'Tiếp',
+      'opt_hint': 'Mã OPT gửi tới điện thoại',
+      'opt_confirm': 'Xác nhận',
+      'balance': 'Số dư tài khoản',
     },
   };
   String get phoneValidate {
@@ -45,6 +52,22 @@ class D4Localizations {
 
   String get register {
     return _localizedValues[locale.languageCode]['register'];
+  }
+
+  String get next {
+    return _localizedValues[locale.languageCode]['next'];
+  }
+
+  String get optConfirm {
+    return _localizedValues[locale.languageCode]['opt_confirm'];
+  }
+
+  String get optHint {
+    return _localizedValues[locale.languageCode]['opt_hint'];
+  }
+
+  String get balance {
+    return _localizedValues[locale.languageCode]['balance'];
   }
 }
 
