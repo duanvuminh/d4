@@ -1,3 +1,4 @@
+import 'package:d4/screens/components/deal.dart';
 import 'package:flutter/material.dart';
 import 'package:d4/services/authen.dart';
 
@@ -21,7 +22,9 @@ class _DashboardPageState extends State<DashboardPage> {
             children: <Widget>[
               Row(
                 children: <Widget>[Expanded(child: CBlance())],
-              )
+              ),
+              const SizedBox(height:16),
+              CDeal()
             ],
           ),
         ));

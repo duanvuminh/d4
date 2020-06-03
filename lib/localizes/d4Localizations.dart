@@ -21,6 +21,10 @@ class D4Localizations {
       'opt_confirm': 'Confirm',
       'opt_hint': 'OPT was send to your phone',
       'balance': 'Balance',
+      'post_handset': 'POS Handset',
+      'post_handset_hint': "IDS's POS Handset",
+      'post_handset_login': "Post handset login",
+      'normal_login': "Personal login",
     },
     'vi': {
       'phone_validate': 'ISDN không đúng định dạng',
@@ -32,6 +36,10 @@ class D4Localizations {
       'opt_hint': 'Mã OPT gửi tới điện thoại',
       'opt_confirm': 'Xác nhận',
       'balance': 'Số dư tài khoản',
+      'post_handset': 'POS Handset',
+      'post_handset_hint': "IDS của POS Handset",
+      'post_handset_login': "Post handset login",
+      'normal_login': "Đăng nhập cá nhân",
     },
   };
   String get phoneValidate {
@@ -68,6 +76,22 @@ class D4Localizations {
 
   String get balance {
     return _localizedValues[locale.languageCode]['balance'];
+  }
+
+  String get postHandset {
+    return _localizedValues[locale.languageCode]['post_handset'];
+  }
+
+  String get postHandsetHint {
+    return _localizedValues[locale.languageCode]['post_handset_hint'];
+  }
+
+  String get postHandsetLogin {
+    return _localizedValues[locale.languageCode]['post_handset_login'];
+  }
+
+  String get normalLogin {
+    return _localizedValues[locale.languageCode]['normal_login'];
   }
 }
 

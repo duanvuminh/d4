@@ -1,3 +1,4 @@
+import 'package:d4/screens/my_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -5,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:d4/screens/home.dart';
 import 'package:d4/screens/login.dart';
 import 'package:d4/screens/loading.dart';
-import 'package:d4/screens/optConfirm.dart';
+import 'package:d4/screens/opt_confirm.dart';
 import 'package:d4/themes/theme.dart';
 import 'package:d4/models/user_model.dart';
 import 'package:d4/localizes/d4Localizations.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
               return LoginPage();
             }
           },
-          "opt": (context) => OPTConfirm()
+          "opt": (context) => OPTConfirm(),
+          "mypage": (context) => MyPage(),
         },
         theme: appTheme,
         localizationsDelegates: [

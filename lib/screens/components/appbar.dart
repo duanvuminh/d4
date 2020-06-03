@@ -1,5 +1,5 @@
+import 'package:d4/screens/components/avatar.dart';
 import 'package:flutter/material.dart';
-import 'avatar.dart';
 
 class CAppbar extends StatelessWidget with PreferredSizeWidget{
   @override

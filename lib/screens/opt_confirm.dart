@@ -45,6 +45,7 @@ class _OPTConfirmState extends State<OPTConfirm> {
                       style: TextStyle(color: Colors.white),
                     )),
                     onPressed: () {
+                      userRepository.setHandset(args.handset);
                       userRepository
                           .signInWithOTP(smsCode, args.verificationId)
                           .then((AuthResult auth) {

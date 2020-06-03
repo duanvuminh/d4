@@ -15,7 +15,9 @@ class LoginForm extends StatefulWidget {
 
 class _LoginForm extends State<LoginForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  bool handsetLogin = false;
+  String phone = '';
+  String handset = '';
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
@@ -46,7 +48,25 @@ class _LoginForm extends State<LoginForm> {
                   return null;
                 }
               },
+              onChanged: (String val) {
+                phone = val;
+              },
             ),
+            const SizedBox(height: 8.0),
+            handsetLogin
+                ? TextFormField(
+                    decoration: InputDecoration(
+                      labelText: D4Localizations.of(context).postHandset,
+                      // hintText: D4Localizations.of(context).postHandsetHint,
+                      prefixIcon: Icon(Icons.business),
+                      isDense: true,
+                      prefixText: '020-',
+                    ),
+                    onChanged: (String val) {
+                      handset = val;
+                    },
+                  )
+                : const SizedBox(height: 0.0),
             // const SizedBox(height: 16.0),
             // TextFormField(
             //   decoration: const InputDecoration(
@@ -70,7 +90,8 @@ class _LoginForm extends State<LoginForm> {
             //   const Spacer(),
             //   FlatButton(child: new Text('Quên mật khẩu'), onPressed: () {})
             // ]),
-            const SizedBox(height: 16.0),
+            handsetLogin
+                ? const SizedBox(height: 8.0):const SizedBox(height: 0.0),
             RaisedButton(
                 child: Center(
                     child: Text(D4Localizations.of(context).next,
@@ -104,16 +125,29 @@ class _LoginForm extends State<LoginForm> {
         ),
       ),
       const Spacer(),
+      Padding(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+          child: FlatButton(
+            onPressed: () {
+              this.setState(() {
+                handsetLogin = !handsetLogin;
+              });
+            },
+            child: Text(handsetLogin
+                ? D4Localizations.of(context).normalLogin
+                : D4Localizations.of(context).postHandsetLogin),
+          ))
     ]);
   }
 
   void _submit() {
     if (_formKey.currentState.validate()) {
-      verifyPhone("+1 650-555-3434");
+      verifyPhone("+1 650-555-3434", handset);
+      // verifyPhone(phone, handset);
     }
   }
 
-  Future<void> verifyPhone(phoneNo) async {
+  Future<void> verifyPhone(phoneNo, _handset) async {
     var userRepository = Provider.of<UserRepository>(context);
 
     final PhoneVerificationCompleted verified = (AuthCredential authResult) {
@@ -126,7 +160,7 @@ class _LoginForm extends State<LoginForm> {
     };
 
     final PhoneCodeSent smsSent = (String verId, [int forceResend]) {
-      Agrs agrs = new Agrs.fromLogin(verId);
+      Agrs agrs = new Agrs.fromLogin(verId,handset);
       Navigator.pushNamed(context, "opt", arguments: agrs);
     };
 
